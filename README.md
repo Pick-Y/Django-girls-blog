@@ -100,3 +100,16 @@ To add the model just created, we run the command:
 Migrations for 'blog':
   blog/migrations/0001_initial.py
     - Create model Post"
+
+# accessing the Django admin page
+To access the Django admin page, we need to create a superuser or a user account that has control over the website
+- run the command: manage.py createsuperuser
+The terminal will prompt you with:
+Username: 
+Email address: 
+Password:
+Password (again):
+
+Now, go back to the browser and add "/admin" to the local host "http://127.0.0.1:8000/admin"
+
+It will take you to a login page where to insert the login details just created.
