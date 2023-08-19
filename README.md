@@ -101,7 +101,7 @@ Migrations for 'blog':
   blog/migrations/0001_initial.py
     - Create model Post"
 
-# accessing the Django admin page
+# Accessing the Django admin page
 To access the Django admin page, we need to create a superuser or a user account that has control over the website
 - run the command: manage.py createsuperuser
 The terminal will prompt you with:
