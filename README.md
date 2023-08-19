@@ -39,4 +39,57 @@ We first create a number of files and directories provided by the django framewo
 You should now see the Django home page hoset at 127.0.0.1
 
 # Setting up a database
+In the setting.py file, a database is already set up:
+"DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}"
 
+To create a database for our project, from the main folder, we run the command: manage.py migrate
+
+# Creating a new application
+ - Inside our project, we create our blog application by running this command: manage.py startapp blog ("blog"is the name of the application)
+ - Once we have create our application, we need to make python aware that it exits and it should use it.
+ - in the in the settings.py contained in the mysite folder we add "blog" to the INSTALLED_APPS variable:
+ INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog', #added application -> this is a comment
+]
+
+# Creating a post model
+To store pur posts into the database, we need to create an object model that will contain all the information a post may contain, for example: "author", "title", etc.
+ - When we created our application, a file named models.py was cerated into our "blog" folder.
+ - import the below models into that  file:
+    from django.conf import settings
+    from django.db import models 
+    from django.utils import timezone
+ -  Now we can create the post object
+ - class Post(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title
+
+# object post model explanation
+
+- class Post(models.Model): we create an oject by using the class keyword and pass in models.Model. models.Model means that the Post is a Django model, so that Django knows that it needs to be store in the database.
+-  author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE): a post author can create many posts, therefore we need to link the author of the post with another table that may contain a primary key wich is unique to a specific attribute.
+- title = models.CharField(max_length=200): refers to a field contained in the table post and indicates that it must me a string with a maximum length of 200 characters.
+- text = models.TextField(): refers to creating a text in the table. In this case, it will create the text for our post
+- created_date = models.DateTimeField(default=timezone.now): this is the date the post was created and gets the date from the "from django.utils import timezone" installed at the top of the file
+-  published_date = models.DateTimeField(blank=True, null=True): this refers to the date when the post was pblished.
