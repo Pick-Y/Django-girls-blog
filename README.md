@@ -10,4 +10,8 @@ Creating a virtual environment is helpful as it isolates all the dependencie in 
 2. CD in that folder and run this command: 'python3 -m venv myvenv' ('myenv' is the name of the virtual environment)
 In your project, now, you have a folder called myenv.
 
+-Run virtual environment:
+1. Cd into myenv (or any name that you have choosen for your virtual environment folder) and run: 'myvenv\Scripts\activate'
+Once you run that command, you'll a prexix in your path or "(myenv) documents/django:", for example. Now, you can 
+install dependencies in your virtual environment
 
