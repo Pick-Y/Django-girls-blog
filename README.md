@@ -93,3 +93,10 @@ To store pur posts into the database, we need to create an object model that wil
 - text = models.TextField(): refers to creating a text in the table. In this case, it will create the text for our post
 - created_date = models.DateTimeField(default=timezone.now): this is the date the post was created and gets the date from the "from django.utils import timezone" installed at the top of the file
 -  published_date = models.DateTimeField(blank=True, null=True): this refers to the date when the post was pblished.
+
+# Create tables for models in database
+To add the model just created, we run the command:
+"python manage.py makemigrations blog
+Migrations for 'blog':
+  blog/migrations/0001_initial.py
+    - Create model Post"
