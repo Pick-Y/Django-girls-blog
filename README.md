@@ -148,5 +148,32 @@ urlpatterns = [
     path('', include(('blog.urls')))
 ]"
 
+# Dynamic data in templates
+In our view.py file, we are going to add: 
+
+"from django.shortcuts import render
+from django.utils import timezone
+from .models import Post
+
+"def post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {})"
+
+With "Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+"
+we are composing a query to our database where we have a "Post" model and we access its object and can perform queries.
+In this case, we are telling the database to order the data by published date.
+
+- Display the data in the HTML page:
+we can place {{posts}} in between an <article> tag, or any other tag and loop through the object by writing: {% for post in posts %}
+              {{ post }}
+            {% endfor %}
+- to extrate each single properties contained in the object, you want to, for instance:
+
+<h2><a href="">{{ post.title }}</a></h2>
+in this way the title will be placed in a h2 tag
+
+
+
 
 
