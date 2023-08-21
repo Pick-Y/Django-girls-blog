@@ -173,6 +173,14 @@ we can place {{posts}} in between an <article> tag, or any other tag and loop th
 <h2><a href="">{{ post.title }}</a></h2>
 in this way the title will be placed in a h2 tag
 
+# Static file in Django
+Static files are were we put css and images. Their content do not depend on the request context.
+- add a "static" folder -> then a, inside the static folder add -> a "css" folder and, inside the css -> a file called "blog.css"
+- add the linkt to this file in the "head" section"
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+- add this line to the very top f the hmtl page:
+{% load static %}
+
 
 
 
