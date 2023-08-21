@@ -113,3 +113,40 @@ Password (again):
 Now, go back to the browser and add "/admin" to the local host "http://127.0.0.1:8000/admin"
 
 It will take you to a login page where to insert the login details just created.
+
+# Urls in Django
+In the mysite/urls.py, the default setting is:
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+That is a path that Djanco has already set up. Tha is why if we type "http://127.0.0.1:8000/admin" in the browser, we are taken to the admin page.
+
+We can add our own list of urls in the "urlpatterns" list above. However, we can reference a file that contains all the urls we create.
+
+# Creating views to show website content
+In the "template" folder inside the new application "Blog" create a post_list.html file.
+- reference your newly created view in the "views.py" file:
+"def post_list(request):
+    return render(request, 'blog/post_list.html', {})"
+The "post_list" function takes a request and call another function, "render", to render the page contained in "blog/post_list.html"
+- now we need to tell Django where to find our page. To do so, we had a url 
+- add the following code to the urls.py in the "blog" directory:
+"from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list')
+]"
+- add the following code to the urls.py contained in the "main" folder:
+
+"from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include(('blog.urls')))
+]"
+
+
+
