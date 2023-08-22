@@ -181,7 +181,21 @@ Static files are were we put css and images. Their content do not depend on the 
 - add this line to the very top f the hmtl page:
 {% load static %}
 
+# Create a base template
+If we want to apply a template to other pages of the website, we can create another file in the "template/blog/" folder and call it "base.py"
+- we move all the content of the "post_list.py" file into the "base.py" file.
+- Then, we wrap the <article> content with the Django tag:
+"{% extends 'blog/base.html' %}
+{% for post in posts %}
+    <article class="post">
+        <time class="date">
+            {{ post.published_date }}
+        </time>
+        <h2><a href="">{{ post.title }}</a></h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </article>
+{% endfor %}"
 
-
+and add "{% extends 'blog/base.html' %}" to the top of the file
 
 
